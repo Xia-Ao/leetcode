@@ -17,14 +17,9 @@ var subarraySum = function(nums, k) {
   let n = 0;
   let len = nums.length;
   for (let i = 0; i < len; i++) {
-    let sum = nums[i];
-    // console.log('i', i, sum)
-    if (sum === k) {
-      n++;
-    }
-    for (let j = i + 1; j < len; j++) {
+    let sum = 0;
+    for (let j = i; j < len; j++) {
       sum += nums[j];
-      // console.log('j', i, j, sum)
       if (sum === k) {
         n++;
       }
