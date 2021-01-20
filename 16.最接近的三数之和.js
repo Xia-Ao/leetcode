@@ -21,13 +21,14 @@ var threeSumClosest = function (nums, target) {
   let res = null;
   let lastDiff = null;
 
-  // 第一层便利
+  // 第一层遍历
   for (let i = 0; i < nums.length; i++) {
 
     // 双指针
     let L = i + 1;
     let R = nums.length - 1;
     let target2 = target - nums[i];
+    // if (target2 > minDiff) continue;
 
     while (L < R) {
       console.log(i, L, R);
@@ -38,8 +39,8 @@ var threeSumClosest = function (nums, target) {
         minDiff = Math.abs(diff);
         res = rest + nums[i];
       }
-      console.log('--',diff, lastDiff, rest);
-      if (diff > lastDiff) {
+      console.log('--', diff, lastDiff, rest);
+      if (diff >= 0 && ) {
         L++
       } else {
         R--;
@@ -55,6 +56,6 @@ var threeSumClosest = function (nums, target) {
 };
 
 // threeSumClosest([0,2,1,-3], 1);
-threeSumClosest([1,2,4,8,16,32,64,128], 82);
+threeSumClosest([1, 2, 4, 8, 16, 32, 64, 128], 82);
 // @lc code=end
 
