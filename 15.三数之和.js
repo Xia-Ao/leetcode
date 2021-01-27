@@ -79,7 +79,6 @@ var threeSum = function (nums) {
     }
   }
 
-  console.log(res);
   return res;
 };
 
