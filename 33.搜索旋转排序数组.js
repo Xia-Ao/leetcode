@@ -19,15 +19,15 @@ var search = function (nums, target) {
    *  2.2 如果不在其中，则在无序数组中递归步骤一中二分法
    */
 
-
-  let left = nums[0];
-  let right = nums[nums.length - 1];
+  let left = 0;
+  let right = nums.length - 1;
   while (left <= right) {
     let mid = (left + right) >> 1;
+    console.log(mid);
+
     if (nums[mid] === target) {
       return mid;
-    } else if (nums[mid] > nums[right]) {
-      // 前半部有序，后半部无序 
+    } else if (nums[mid] > nums[right]) { // 前半部有序，后半部无序 
       // 看target是否在有序部分，看丢弃哪一部分
       // 在有序部分 丢弃无序部分，有序部分没有，则丢弃有序部分
       if (nums[left] <= target && target < nums[mid]) {
@@ -35,18 +35,18 @@ var search = function (nums, target) {
       } else {
         left = mid + 1;
       }
-
-    } else {
-      // 前半部无序，后半部有序  判断后部分
+    } else { // 前半部无序，后半部有序  判断后部分
       if (nums[mid] < target && target <= nums[right]) {
-        left = mid - 1;
+        left = mid + 1;
       } else {
-        right = mid + 1;
+        right = mid - 1;
       }
     }
-
   }
-
+  return -1;
 };
+
+// console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
+console.log(search([4, 5, 6, 7, 0, 1, 2], 3));
 // @lc code=end
 
