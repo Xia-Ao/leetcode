@@ -14,6 +14,9 @@ var combinationSum2 = function (candidates, target) {
   let res = [];
 
   const isEqualArray = (a, b) => {
+    // 防止改变原数组
+    a = [...a];
+    b = [...b];
     const res = a.length === b.length && a.sort().toString() === b.sort().toString();
     return res;
     // 或者通过filter和include组合
@@ -24,17 +27,16 @@ var combinationSum2 = function (candidates, target) {
     // 约束条件， 由于都是正数，当当前sum已经大于target时，就可以结束dfs
     if (sum >= target) {
       if (sum === target) {
-        if (res.length === 0) {
+        if (!res.length) {
           res.push(temp.slice());
-        } else {
-          // 剔除重复组合 判断两个数组内容是否一样
-          for (let j = 0; j < res.length; j++) {
-            // console.log(j, res[j], temp, res.length);
-            if (isEqualArray(res[j], temp)) return;
-          }
-          res.push(temp.slice());
-          return;
+          return
         }
+        // 剔除重复组合 判断两个数组内容是否一样
+        for (let j = 0; j < res.length; j++) {
+          if (isEqualArray(res[j], temp)) return;
+        }
+        res.push(temp.slice());
+        return;
       }
       return;
     }
@@ -50,6 +52,6 @@ var combinationSum2 = function (candidates, target) {
 
 };
 
-// combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
+// combinationSum2([3, 1, 3, 5, 1, 1], 8)
 // @lc code=end
 
