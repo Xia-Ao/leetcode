@@ -19,52 +19,45 @@ var trap = function (height) {
   const maxHeight = Math.max(...height);
   const maxIndex = height.indexOf(maxHeight);
 
-  function recursionL(maxIndex, end, sum) {
-    console.log('recursion', maxIndex, end, sum);
-    let max = 0;
-    let index = maxIndex;
-    // 向左
-    for (let i = maxIndex - 1; i >= end; i--) {
-      if (height[i] > max) {
-        max = height[i];
-        index = i;
-      }
-    }
-    // 计算值
-    for (let i = maxIndex - 1; i >= index; i--) {
-      sum += max - height[i];
-    }
-    if (maxIndex <= 0 || max === 0) return sum;
-    return recursionL(index, end, sum)
-  };
-  function recursionR(maxIndex, end, sum) {
-    console.log('recursion', maxIndex, end, sum);
+  function recursion(maxIndex, end, sum) {
     let max = 0;
     let index = maxIndex;
     // 表示向右
-
-    let i = maxIndex + 1;
-    for (let i = maxIndex + 1; i < end; i++) {
-      if (height[i] > max) {
-        max = height[i];
-        index = i;
+    if (end > 0) {
+      for (let i = maxIndex + 1; i < end; i++) {
+        if (height[i] > max) {
+          max = height[i];
+          index = i;
+        }
       }
+      // 如果到了最后一个，或者没有找到max，表示终止条件
+      if (maxIndex >= end - 1 || max === 0) {
+        return sum;
+      }
+      // 计算值
+      for (let i = maxIndex + 1; i <= index; i++) {
+        sum += max - height[i];
+      }
+      return recursion(index, end, sum);
+    } else {
+      // 向左
+      for (let i = maxIndex - 1; i >= end; i--) {
+        if (height[i] > max) {
+          max = height[i];
+          index = i;
+        }
+      }
+      // 计算值
+      for (let i = maxIndex - 1; i >= index; i--) {
+        sum += max - height[i];
+      }
+      // 如果到了最后一个，或者没有找到max，表示终止条件
+      if (maxIndex <= 0 || max === 0) return sum;
+      return recursion(index, end, sum)
     }
-    if (maxIndex >= end - 1 || max === 0) {
-      console.log('return', sum);
-      return sum;
-    }
-    // 计算值
-    for (let i = maxIndex + 1; i <= index; i++) {
-      sum += max - height[i];
-    }
-    return recursionR(index, end, sum);
+
   };
-  const res1 = recursionL(maxIndex, 0, 0);
-  const res2 = recursionR(maxIndex, height.length, 0);
-  // const res2 = 0;
-  console.log(res1 + res2)
-  return res1 + res2;
+  return recursion(maxIndex, 0, 0) + recursion(maxIndex, height.length, 0);
 }
 // @lc code=end
 
