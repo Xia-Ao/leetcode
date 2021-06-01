@@ -19,8 +19,6 @@ var spiralOrder = function (matrix) {
   let right = colum - 1;
   let res = [];
 
-  console.log(top, bottom, left, right);
-
 
   // 按照轨迹遍历
   while (left < right && top < bottom) {
@@ -47,13 +45,10 @@ var spiralOrder = function (matrix) {
     }
     left++;
 
-    console.log('--', res, left, right,);
   }
 
-  console.log(res);
-  console.log('top', top, 'bottom', bottom, 'left', left, 'right', right);
-
   // 规则的外圈都处理完了，就剩下单独的一行或者一列，单独处理
+  // TODO 待优化
   if (left < right && top === bottom) {
     for (let i = left; i <= right; i++) {
       res.push(matrix[top][i])
@@ -65,11 +60,10 @@ var spiralOrder = function (matrix) {
   } else if (left === right && top === left && left === top && right === bottom) {
     res.push(matrix[top][left])
   }
-  console.log(res);
   return res;
 
   // 加入数据
 };
 // @lc code=end
 
-spiralOrder([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]);
+// spiralOrder([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]);
