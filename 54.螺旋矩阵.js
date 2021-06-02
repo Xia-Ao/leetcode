@@ -21,8 +21,8 @@ var spiralOrder = function (matrix) {
 
 
   // 按照轨迹遍历
-  while (left < right && top < bottom) {
-    // 找这个圈
+  while (left <= right && top <= bottom) {
+    // 找这个圈 先遍历上边 右边
     // top  left -> right
     for (let i = left; i <= right; i++) {
       res.push(matrix[top][i]);
@@ -33,36 +33,24 @@ var spiralOrder = function (matrix) {
       res.push(matrix[i][right])
     }
     right--;
-    // bottom  right -> left
-    for (let i = right; i >= left; i--) {
-      res.push(matrix[bottom][i])
-    }
-    bottom--;
-    // left  bottom -> top
-    for (let i = bottom; i >= top; i--) {
-      console.log(i, left);
-      res.push(matrix[i][left]);
-    }
-    left++;
 
+    // 满足条件的 下边， 左边 遍历
+    if (left < right + 1 && top - 1 < bottom) {
+      // bottom  right -> left
+      for (let i = right; i >= left; i--) {
+        res.push(matrix[bottom][i])
+      }
+      bottom--;
+      // left  bottom -> top
+      for (let i = bottom; i >= top; i--) {
+        res.push(matrix[i][left]);
+      }
+      left++;
+    }
+    // 一圈遍历完成
   }
 
-  // 规则的外圈都处理完了，就剩下单独的一行或者一列，单独处理
-  // TODO 待优化
-  if (left < right && top === bottom) {
-    for (let i = left; i <= right; i++) {
-      res.push(matrix[top][i])
-    }
-  } else if (top < bottom && left === right) {
-    for (let i = top; i <= bottom; i++) {
-      res.push(matrix[i][right])
-    }
-  } else if (left === right && top === left && left === top && right === bottom) {
-    res.push(matrix[top][left])
-  }
   return res;
-
-  // 加入数据
 };
 // @lc code=end
 
