@@ -22,7 +22,7 @@ var insert = function (intervals, newInterval) {
    * merge[1] >= item[0]，找到了对应区间，merge[0]先取两个数据左边值的最小值，merge[1]取两个数据的右边最大值，
    * 然后一直遍历，触发遍历结束条件
    *  
-   * 同时记住对应的区间左边和区间有右边在数组中的问题，方便使用merge区间替换
+   * 最后使用
    * 
    */
   let res = intervals;
@@ -42,35 +42,10 @@ var insert = function (intervals, newInterval) {
     return intervals
   }
 
-  // let i = 0;
-  // while (merge[1] >= intervals[i][0]) {
-  //   // 如果left有过标记，则不需要修改指针
-  //   if (typeof left !== 'number') {
-  //     left = i;
-  //   }
-  //   merge[0] = Math.min(merge[0], intervals[i][0]);
-  //   merge[1] = Math.max(newInterval[1], intervals[i][1]);
-  //   i++;
-  // }
-
-  // right = i;
-  // // 遍历结束的时候，如果左值没有的话，就用当前的值。
-  // if (typeof left !== 'number') {
-  //   left = i;
-  // }
-
-
-  for (let i = 0; i < intervals.length; i++) {
-    // 如果目标值的右值小于区间左边 遍历结束
-    if (merge[1] < intervals[i][0]) {
-      right = i;
-      // 遍历结束的时候，如果左值没有的话，就用当前的值。
-      if (typeof left !== 'number') {
-        left = i;
-      }
-      break;
-    }
-    // 如果目标值的左值小于或等于原数据的右值，则找到区间位置
+  let i = 0;
+  // 跳出遍历条件 intervals[i] 不存在 或者item[0] > merge[1], 后面的item都会大于merge, 所以遍历结束
+  while (intervals[i] && merge[1] >= intervals[i][0]) {
+    // 如果目标值的左值小于或等于原数据的右值，则找到区间位置, 替换merge[0] merge[1]的值
     if (newInterval[0] <= intervals[i][1]) {
       // 如果left有过标记，则不需要修改指针
       if (typeof left !== 'number') {
@@ -79,17 +54,19 @@ var insert = function (intervals, newInterval) {
       merge[0] = Math.min(merge[0], intervals[i][0]);
       merge[1] = Math.max(newInterval[1], intervals[i][1]);
     }
+    i++;
   }
-  // 临界情况，如果右边指针没有值，将指针设置为数组最后一个
-  if (!right) right = intervals.length;
 
-  // console.log('merge:', merge, left, right)``
+  right = i; // 遍历结束，右指针指到当前index
+  // 边界情况 遍历结束的时候，如果左指针还没赋值的话，表示不需要合并，直接在当前index处插入
+  if (typeof left !== 'number') {
+    left = i;
+  }
+
+  // console.log('merge:', merge, left, right)
 
   intervals.splice(left, right - left, merge);
   return intervals;
 };
-
-// console.log(insert([[1,2],[3,5],[6,7],[8,10],[12,16]], [4,8]));
-// console.log(insert([[1,3],[6,9]], [2,5]));
 // @lc code=end
 
