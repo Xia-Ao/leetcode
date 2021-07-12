@@ -23,9 +23,11 @@ var uniquePaths = function (m, n) {
   // 创建一个二维数组
   const f = new Array(m).fill(0).map(item => new Array(n).fill(0))
 
+  // 边界条件 j===0
   for (let i = 0; i < m; i++) {
     f[i][0] = 1;
   }
+  // 边界条件 i===0
   for (let j = 0; j < n; j++) {
     f[0][j] = 1;
   }
