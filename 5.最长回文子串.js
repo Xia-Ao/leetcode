@@ -22,7 +22,7 @@ var longestPalindrome = function (s) {
    * 取mid两边的下标的时候，就要注意区分mid是s[i]还是 s[i]s[i+1]中间的空串
    * 判断的时候直接跳过空串，按照正常字符串判断
    */
-  for (let i = 1; i < (2 * len - 1); i++) {
+  /* for (let i = 1; i < (2 * len - 1); i++) {
     // 通过i的奇偶判断 是s[i] 还是s[i]s[i+1]中间的空串
     let j, k;
     if (i % 2) { // 奇数 两数中间空串
@@ -33,6 +33,37 @@ var longestPalindrome = function (s) {
       k = j + 2;
     }
 
+    // 从中间往两边扩展 只要j k 在区间内并且 s[j] === s[k] 就一直遍历
+    while (j >= 0 && k < len && s[j] === s[k]) {
+      if (k - j + 1 >= maxLen) {
+        max = s.slice(j, k + 1);
+        maxLen = k - j + 1;
+      }
+      j--;
+      k++;
+    } 
+  } */
+
+  // 【推荐 更好理解】不通过奇偶判断，每次遍历的时候while两遍 取一次左边，取一次自己
+  for (let i = 0; i < len; i++) {
+    let j, k;
+
+    // left取自己
+    j = i;
+    k = i + 1;
+    // 从中间往两边扩展 只要j k 在区间内并且 s[j] === s[k] 就一直遍历
+    while (j >= 0 && k < len && s[j] === s[k]) {
+      if (k - j + 1 >= maxLen) {
+        max = s.slice(j, k + 1);
+        maxLen = k - j + 1;
+      }
+      j--;
+      k++;
+    }
+
+    // left取左值
+    j = i - 1;
+    k = i + 1;
     // 从中间往两边扩展 只要j k 在区间内并且 s[j] === s[k] 就一直遍历
     while (j >= 0 && k < len && s[j] === s[k]) {
       if (k - j + 1 >= maxLen) {
