@@ -20,7 +20,7 @@ var isValid = function (s) {
     ['}', '{'],
   ])
 
-  // 使用栈的思想，座括号先入栈，检测到右括号，与栈里面的左括号对比
+  // 使用栈的思想，左括号先入栈，检测到右括号，与栈里面的左括号对比
   const stack = [];
   s.split('').forEach(val => {
     if (map.has(val)) {
