@@ -17,8 +17,38 @@
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
-  return []
+var removeNthFromEnd = function (head, n) {
+  if (!head.next) return head.next;
+  let cur = head;
+
+  // 遍历获取链表长度
+  let len = 0;
+  while (cur) {
+    len++;
+    cur = cur.next;
+  }
+
+  cur = head;
+  if (n === len) {
+    return cur.next;
+  }
+  let i = 0;
+  while (i < len - n - 1 && cur) {
+    i++;
+    cur = cur.next;
+  }
+
+  let delNode = cur.next;
+
+  // 如果nextHead后面还有值的话，暂存起来
+  if (delNode && delNode.next) {
+    cur.next = delNode.next;
+  } else {
+    cur.next = null;
+  }
+  return head;
+
+  // 双指针， 指针位置相差n
+
 };
 // @lc code=end
-
