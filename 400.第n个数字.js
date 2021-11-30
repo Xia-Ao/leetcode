@@ -19,34 +19,31 @@
  * @param {number} n
  * @return {number}
  */
-var findNthDigit = function(n) {
+var findNthDigit = function (n) {
     let base = 9;   // 区间
     let digist = 1; // 位数
     // 1、计算出对应的位数和区间
-    while (n- base * digist > 0) {
+    while (n - base * digist > 0) {
         n -= base * digist;
         base *= 10;
         digist++;
     }
     // 2、确定对应的数值 通过对应的区间数 + 计算出来的在该区间中的第几个数
-    let a = parseInt(n/digist) + (n%digist > 0 ? 1 : 0); 
-    let number = Math.pow(10, digist-1) - 1 + a;
+    let a = parseInt(n / digist) + (n % digist > 0 ? 1 : 0);
+    let number = Math.pow(10, digist - 1) - 1 + a;
 
     // 3、确定数字中对应的位置下标
     let numStr = number.toString();
     let index = 0;
-    if(n > digist) {
-        index = n%digist === 0 ? digist : n%digist;
+    if (n > digist) {
+        index = n % digist === 0 ? digist : n % digist;
     } else {
         index = n;
     }
-    console.log(n,base, digist,a, number, index);
-    
-
-    return Number(numStr[index-1]);
+    return Number(numStr[index - 1]);
 
 };
 
-console.log(findNthDigit(365));
+// console.log(findNthDigit(365));
 // @lc code=end
 
