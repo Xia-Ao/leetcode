@@ -20,7 +20,6 @@ var generateParenthesis = function (n) {
     for (let j = 0; j < i; j++) {
       let str1 = total[j]; // p = j 时的括号组合情况
       let str2 = total[i - j - 1]; //  q = (i-1) - j 时的括号组合情况
-      console.log('str', str1, str2)
       for (s1 of str1) {
         for (s2 of str2) {
           if (!s1) s1 = '';

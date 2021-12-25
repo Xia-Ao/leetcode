@@ -12,7 +12,7 @@
 var minCostClimbingStairs = function (cost) {
 
   // 状态转移方程
-  // S(n) = Min[S(i-1), S(i-2)] + c(i)
+  // S(n) = Min[S(i-1), S(i-2)] + c(i)]
   const n = cost.length;
   let S = new Array(n).fill(0);
 
