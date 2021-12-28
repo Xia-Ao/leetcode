@@ -20,7 +20,7 @@ var maxProduct = function (nums) {
 
   for (let i = 0; i < nums.length; i++) {
     // 如果是负数时，交换imax imin
-    if(nums[i]< 0) {
+    if (nums[i] < 0) {
       let temp = imax;
       imax = imin;
       imin = temp;
