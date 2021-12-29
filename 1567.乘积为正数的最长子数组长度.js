@@ -14,8 +14,9 @@ var getMaxLen = function (nums) {
    * 用0区分
    */
   let max = 0;
-  let z = 0;
-  let f = 0;
+  let z = 0; // 正数个数
+  let f = 0; // 负数个数
+  // 遇到负数时，正负数个数交换，遇到0 时，重置
 
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] === 0) {
@@ -23,7 +24,7 @@ var getMaxLen = function (nums) {
       f = 0;
     } else if (nums[i] > 0) {
       z++;
-      if (f > 0) f++;
+      if (f) f++; // 同步更新f
       max = Math.max(max, z);
     } else {
       // 正负数交换
@@ -31,7 +32,7 @@ var getMaxLen = function (nums) {
       z = f;
       f = temp;
       f++;
-      if (z > 0) z++
+      if (z) z++
       max = Math.max(max, z);
     }
   }
