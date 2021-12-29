@@ -45,6 +45,19 @@ var maxProfit = function (prices) {
 
   return dp[days - 1][1];
 
+  // 也可以简化为一维
+  const buy = new Array(days);
+  const sell = new Array(days);
+
+  buy[0] = -prices[0];
+  sell[0] = 0;
+
+  for (let i = 1; i < days; i++) {
+    buy[i] = Math.max(buy[i - 1], sell[i - 1] - prices[i]);
+    sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i] - fee);
+  }
+  return sell[days - 1];
+
 };
 // @lc code=end
 
