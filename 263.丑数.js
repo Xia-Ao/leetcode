@@ -9,8 +9,15 @@
  * @param {number} n
  * @return {boolean}
  */
-var isUgly = function(n) {
-
+var isUgly = function (n) {
+  if (n === 0) return false;
+  const F = [2, 3, 5];
+  F.forEach(factor => {
+    while (n % factor === 0) {
+      n /= factor;
+    }
+  })
+  return n === 1;
 };
 // @lc code=end
 

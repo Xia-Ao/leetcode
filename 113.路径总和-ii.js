@@ -17,23 +17,25 @@
  * @param {TreeNode} root
  * @param {number} targetSum
  * @return {number[][]}
+ * 堆栈思想
  */
 var pathSum = function (root, targetSum) {
   const res = [];
+  const temp = [];
 
   function helper(root, targetSum) {
-    let temp = [];
-    if (!root) { temp.pop(); return }
-    else {
-      temp.push(root.val)
+    if (!root) {
+      return;
     }
-
+    temp.push(root.val);
     if (!root.left && !root.right && root.val === targetSum) {
-      res.push(temp);
-      return
+      res.push([...temp]);
     };
 
-    helper(root.left, targetSum - root.val) || helper(root.right, targetSum - root.val);
+
+    helper(root.left, targetSum - root.val);
+    helper(root.right, targetSum - root.val);
+    temp.pop();
   }
 
   helper(root, targetSum);
