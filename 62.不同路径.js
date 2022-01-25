@@ -41,4 +41,4 @@ var uniquePaths = function (m, n) {
 };
 // @lc code=end
 
-uniquePaths(3, 7);
+// uniquePaths(3, 7);
