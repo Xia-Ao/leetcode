@@ -21,53 +21,50 @@
 var reverseBetween = function (head, left, right) {
   if (left === right) return head;
 
-  let newHead = new ListNode(0, head);
+  let newHead = new ListNode(null, head);
   let pre = newHead;
 
-  // 1. 找到左边值
+  // 1 先找到left node
   for (let i = 0; i < left - 1; i++) {
-    pre = pre.next
+    pre = pre.next;
   }
 
-  // 2. 找到右边
-  let rightNode = pre;
-  for (let i = 0; i < right - left + 1; i++) {
+  // 2 找到right node
+  let rightNode = pre.next;
+  for (let i = 0; i < right - left; i++) {
+    console.log('i--', i);
     rightNode = rightNode.next;
   }
 
-  // 3. 切除一个子链
-  let leftNode = pre.next;
-  // 暂存后面的
-  let last = rightNode.next; 
-  //  切断子链前后
+  // 3 切割子链表
+  let leftNode = pre.next; // 定义leftNode， pre是左边剩余部分暂存
+  let last = rightNode.next; // 右边剩余部分 暂存
+  // 切断连接
   pre.next = null;
   rightNode.next = null;
 
-  // 4 反转子链
-  reverseList(leftNode);
 
-  // 5. 拼接 注意反转链表后，首尾变了， left变成了right，right => left ,拼接的时候注意
+  // 4 反转子链表
+  function revertLink(node) {
+    let currentNode = node;
+    let preNode = null;
+    while (currentNode) {
+      let temp = currentNode.next; // 暂存之后的节点
+      currentNode.next = preNode; // 当前节点的next指向 反转的pre
+      preNode = currentNode; // 反转的preNode 指向当前节点 pre就增加一个
+      currentNode = temp; // 当前节点下移下一个节点
+    }
+    return preNode;
+  }
+  revertLink(leftNode); // 引用对象，不用赋值
+
+  // 5 将子链表拼接到原链表
+  // 反转之后链表left right 变了
   pre.next = rightNode;
   leftNode.next = last;
 
   return newHead.next;
 
-  // 反转链表
-  function reverseList(head) {
-
-    let currentNode = head; // 1
-    let preNode = null; // 
-
-    while (currentNode) {
-      let temp = currentNode.next; // 2345 暂存起来
-      currentNode.next = preNode // 使用前一个值替换 
-      preNode = currentNode; // 前一个值等于当前替换后的链表
-      currentNode = temp; // 当前链表替换为暂存起来的值
-    };
-    return preNode;
-  };
-
-  
 };
 // @lc code=end
 
