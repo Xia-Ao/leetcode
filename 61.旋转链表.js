@@ -31,13 +31,14 @@ var rotateRight = function (head, k) {
   // console.log('len--', len, k);
   if (k === 0) return head;
 
-  current.next = head; // 将链表首尾相连
+  current.next = head; // 将链表首尾相连 成为一个单环形链表
+  // 找到对应的首节点前一个
   while (k) {
     k--;
     current = current.next;
-  }
-  let newHead = current.next;
-  current.next = null;
+  } 
+  let newHead = current.next; // 新的链表的首节点
+  current.next = null; // 将环形链表分开，这里链表首节点的前一个
 
   return newHead;
 };
