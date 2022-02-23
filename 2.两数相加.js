@@ -39,4 +39,3 @@ var addTwoNumbers = function(l1, l2) {
     return node.next;
 };
 // @lc code=end
-
