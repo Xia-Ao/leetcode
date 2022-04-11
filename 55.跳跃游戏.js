@@ -47,6 +47,7 @@ var canJump = function (nums) {
   }
   return false
 };
+
 // @lc code=end
 
 
