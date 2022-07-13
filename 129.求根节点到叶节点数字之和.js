@@ -39,6 +39,27 @@ var sumNumbers = function (root) {
   const sum = res.reduce((a, b) => Number(a) + Number(b), 0);
   return sum;
 
+
+  // let res = [];
+  // function dfs(root, temp, res) {
+  //   if (!root) {
+  //     return;
+  //   };
+  //   if (!root.left && !root.right) {
+  //     res.push(temp + root.val);
+  //     return;
+  //   }
+  //   temp += root.val;
+  //   dfs(root.left, temp, res);
+  //   dfs(root.right, temp, res);
+  // }
+
+  // dfs(root, '', res);
+  // let sum = 0;
+  // res.forEach(item => {
+  //   sum += +item;
+  // })
+  // return sum;
 };
 // @lc code=end
 
