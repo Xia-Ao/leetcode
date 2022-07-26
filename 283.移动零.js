@@ -14,14 +14,21 @@ var moveZeroes = function (nums) {
   // 向前移动非0数组
   let len = nums.length;
   for (let i = 0; i < len; i++) {
+
     if (nums[i] !== 0) {
       let j = i;
-      while (nums[j] !== 0) {
-        nums
+      while (j > 0 && nums[j - 1] === 0) {
+        let temp = nums[j];
+        nums[j] = nums[j - 1];
+        nums[j - 1] = temp;
+        j--;
       }
     }
   }
+  return nums;
+
 
 };
+moveZeroes([0, 1, 0, 3, 12]);
 // @lc code=end
 
