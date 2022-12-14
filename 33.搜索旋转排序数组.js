@@ -23,7 +23,7 @@ var search = function (nums, target) {
   let right = nums.length - 1;
   while (left <= right) {
     let mid = (left + right) >> 1;
-    console.log(mid);
+    // console.log(mid);
 
     if (nums[mid] === target) {
       return mid;
@@ -47,6 +47,6 @@ var search = function (nums, target) {
 };
 
 // console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
-console.log(search([4, 5, 6, 7, 0, 1, 2], 3));
+// console.log(search([4, 5, 6, 7, 0, 1, 2], 3));
 // @lc code=end
 
