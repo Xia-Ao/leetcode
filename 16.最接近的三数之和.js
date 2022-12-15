@@ -24,7 +24,7 @@ var threeSumClosest = function (nums, target) {
     let target2 = target - nums[i];
 
     while (L < R) {
-      console.log(i, L, R);
+      // console.log(i, L, R);
       let rest = nums[L] + nums[R];
       // 如果存在比上一个最小差距更小的值， 则更新
       let diff = target2 - rest;
