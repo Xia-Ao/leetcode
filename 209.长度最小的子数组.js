@@ -34,11 +34,29 @@ var minSubArrayLen = function (target, nums) {
   //   return 0;
   // return min;
 
-  // 双指针
+  /**
+   * 双指针
+   * 保持一个滑块>=target, 大了移动left，小了移动right
+   */
+  const len = nums.length;
   let l = 0;
   let r = 0;
-  
+  let sum = 0;
+  let min = Number.MAX_SAFE_INTEGER;
+  while (r < len) {
+    sum += nums[r];
+    while (sum >= target) {
+      min = Math.min(min, r - l + 1);
+      sum -= nums[l];
+      l++;
+    }
+    r++;
+  }
+  if (min === Number.MAX_SAFE_INTEGER)
+    return 0;
+  return min;
 };
 // @lc code=end
 
 // minSubArrayLen(7, [2, 3, 1, 2, 4, 3])
+// minSubArrayLen(11, [1, 1, 1, 1, 1, 1, 1, 1])
