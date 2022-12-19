@@ -37,6 +37,7 @@ var multiply = function (num1, num2) {
     // console.log(`sum${i}`, sum, res.toString() + Array(i).fill('0').join(''));
     sum = stringAdd(sum, res.toString() + Array(i).fill('0').join(''))
   }
+  sum = sum.replace(/^(0+)/, '') || '0';
   // console.log(sum);
 
   return sum;
