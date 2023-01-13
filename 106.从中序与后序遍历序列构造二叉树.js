@@ -19,29 +19,35 @@
  * @return {TreeNode}
  */
 var buildTree = function (inorder, postorder) {
-  // 条件判断
-  if (!postorder.length) return null;
-  // 
-  const rootValue = postorder[postorder.length - 1];
-  let root = new TreeNode(rootValue);
+
+  /**
+   * 递归思想
+   * 持续buildTree
+   */
+
+  // 先通过后续找到root
+  if (!postorder.length) {
+    return null;
+  }
+  const root = new TreeNode(postorder[postorder.length - 1]);
+
+  // 在中续结果中，找到root，并切割left right
   if (!inorder.length) return root;
+  const inorderIndex = inorder.indexOf(root.val);
 
-  // 在中序遍历中找到根节点下标
-  const rootIndex = inorder.indexOf(rootValue);
+  const left = inorder.slice(0, inorderIndex);
+  const right = inorder.slice(inorderIndex + 1);
 
-  // 根据下标 将中序遍历分为左右两部分
-  const leftInorder = inorder.slice(0, rootIndex);
-  const rightInorder = inorder.slice(rootIndex + 1);
+  // console.log(inorderIndex, left, right)
 
-  // 根据中序遍历左右子数组的长度，将后序遍历序列给分割成左右两个子序列
-  const leftPostorder = postorder.slice(0, leftInorder.length);
-  const rightPostorder = postorder.slice(leftInorder.length, postorder.length - 1);
+  // 找到
+  const postorderLeft = postorder.slice(0, left.length);
+  const postorderRight = postorder.slice(left.length, postorder.length - 1);
 
+  // console.log(inorderIndex, left, right)
 
-  // 枸酱 左右子树
-  root.left = buildTree(leftInorder, leftPostorder);
-  root.right = buildTree(rightInorder, rightPostorder);
-
+  root.left = buildTree(left, postorderLeft);
+  root.right = buildTree(right, postorderRight);
   return root;
 };
 // @lc code=end

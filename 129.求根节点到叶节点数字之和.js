@@ -18,27 +18,25 @@
  * @return {number}
  */
 var sumNumbers = function (root) {
-  let temp = '';
   let res = [];
 
   function helper(root, s) {
-    if (!root) {
-      return s
-    }
+    if (root === null) return s;
+    // 判断是否到叶子节点
     if (!root.left && !root.right) {
-      res.push(s + root.val);
+      res.push(s + root.val)
       return;
     }
+
     s += root.val;
-    helper(root.left, s)
+    helper(root.left, s);
     helper(root.right, s);
   }
 
   helper(root, '');
 
-  const sum = res.reduce((a, b) => Number(a) + Number(b), 0);
+  const sum = res.reduce((a, b) => +a + +b);
   return sum;
-
 
   // let res = [];
   // function dfs(root, temp, res) {
