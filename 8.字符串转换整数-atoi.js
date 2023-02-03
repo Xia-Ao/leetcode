@@ -15,24 +15,29 @@ var myAtoi = function (s) {
   const max = Math.pow(2, 31);
   for (let i = 0; i < s.length; i++) {
     if (s[i] === ' ') {
+      if(str.length || prefix) break;
       continue;
     }
     if (!str && (s[i] === '-' || s[i] === '+')) {
-      if(prefix) return 0;
+      if (prefix) return 0;
       prefix = s[i];
       continue;
     }
     // console.log('i:', i, s[i])
-    if (/[1-9]/.test(s[i])) {
+    if (/[0-9]/.test(s[i])) {
       str += s[i];
     } else {
       break;
     };
   }
-  // console.log(str, prefix);
-  const res = Math.min(max, +str);
-  return prefix === '-' ? -res : res;
+  // console.log('str:', str)
+  if (prefix === '-') {
+    res = -Math.min(max, +str)
+  } else {
+    res = Math.min(max - 1, +str);
+  }
+  return res;
 };
-// console.log(myAtoi("   -42"));
+// console.log(myAtoi("21474836460"));
 // @lc code=end
 
