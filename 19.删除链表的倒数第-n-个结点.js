@@ -18,7 +18,6 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-  if (!head.next) return head.next;
   let cur = head;
 
   // 遍历获取链表长度
@@ -28,6 +27,7 @@ var removeNthFromEnd = function (head, n) {
     cur = cur.next;
   }
 
+  // 回到head 重头再来
   cur = head;
   if (n === len) {
     return cur.next;
