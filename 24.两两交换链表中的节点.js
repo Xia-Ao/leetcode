@@ -33,16 +33,15 @@ var swapPairs = function (head) {
   // return newHead.next;
 
 
-  // 递归
   if(!head || !head.next) {
     return head;
   }
 
-  let newHead = head.next;
-  head.next = swapPairs(newHead.next);
-  newHead.next = head;
+  let b = head.next;
+  head.next = swapPairs(b.next);
+  b.next = head;
 
-  return newHead;
+  return b;
 
 };
 // @lc code=end
