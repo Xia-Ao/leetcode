@@ -39,4 +39,4 @@ var generateParenthesis = function (n) {
 
 
 
-// generateParenthesis(3);
+// generateParenthesis(4);
