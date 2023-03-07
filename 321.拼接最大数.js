@@ -13,6 +13,7 @@
  */
 var maxNumber = function(nums1, nums2, k) {
 
+  
 };
 // @lc code=end
 
