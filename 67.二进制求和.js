@@ -10,18 +10,27 @@
  * @param {string} b
  * @return {string}
  */
-var addBinary = function(a, b) {
-    // 找到最长的字符串，短的用0补全
-    const maxLen = Math.max(a.length, b.length);
-    a = a.padStart(maxLen, '0');
-    b = b.padStart(maxLen, '0');
-    // 从字符串最后一位开始遍历， 进行位运算
-    let str = ''
-    for(let i = maxLen -1; i >= 0; i--) {
-      
+var addBinary = function (a, b) {
+    a = a.split('');
+    b = b.split('');
+    let res = '';
+    let add = 0;
+    const step = 2;
+    while (a.length || b.length) {
+        let sum = add + Number(a.pop() || 0) + Number(b.pop() || 0);
+        // 发生了进位
+        if (sum >= step) {
+            add = Math.floor(sum / step);
+            sum = sum % step;
+        } else {
+            add = 0;
+        }
+        res = `${sum}${res}`;
     }
-
-
+    if (add) {
+        res = `${add}${res}`;
+    }
+    return res;
 };
 // @lc code=end
-
+// addBinary("1111", "1111")
