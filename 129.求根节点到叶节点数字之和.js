@@ -18,46 +18,20 @@
  * @return {number}
  */
 var sumNumbers = function (root) {
-  let res = [];
-
-  function helper(root, s) {
-    if (root === null) return s;
-    // 判断是否到叶子节点
-    if (!root.left && !root.right) {
-      res.push(s + root.val)
-      return;
+  let stack = [];
+  let res = []
+  function dfs(tree) {
+    if (!tree) return;
+    stack.push(tree.val);
+    if (!tree.left && !tree.right) {
+      res.push(stack.join(''));
     }
-
-    s += root.val;
-    helper(root.left, s);
-    helper(root.right, s);
+    dfs(tree.left)
+    dfs(tree.right)
+    stack.pop();
   }
-
-  helper(root, '');
-
-  const sum = res.reduce((a, b) => +a + +b);
-  return sum;
-
-  // let res = [];
-  // function dfs(root, temp, res) {
-  //   if (!root) {
-  //     return;
-  //   };
-  //   if (!root.left && !root.right) {
-  //     res.push(temp + root.val);
-  //     return;
-  //   }
-  //   temp += root.val;
-  //   dfs(root.left, temp, res);
-  //   dfs(root.right, temp, res);
-  // }
-
-  // dfs(root, '', res);
-  // let sum = 0;
-  // res.forEach(item => {
-  //   sum += +item;
-  // })
-  // return sum;
+  dfs(root);
+  return res.reduce((last, cur) => last + +cur, 0)
 };
 // @lc code=end
 
