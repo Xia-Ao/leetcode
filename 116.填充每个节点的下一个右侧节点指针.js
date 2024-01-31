@@ -20,31 +20,20 @@
  * @return {Node}
  */
 var connect = function (root) {
-  /**
-   * 在当前层，构建下一层的节点next
-   * 如果是同一个父节点，node.left.next = node.right
-   * 如果不是同一个父节点，间隔多层， node.right.next = node.next.left
-   */
+  // 层序遍历
+  if (!root) return root;
 
-  if (root === null) {
-    return root;
-  }
+  const queen = [];
+  queen.push(root)
 
-  let mostLeft = root;
-  while (mostLeft.left !== null) {
-    let head = mostLeft;
-    // 使用next的遍历
-    while (head !== null) {
-      // 第一种情况
-      head.left.next = head.right;
-      // 第二种情况连接
-      if (head.next !== null) {
-        head.right.next = head.next.left;
-      }
-      // 遍历next
-      head = head.next;
+  while (queen.length) {
+    let len = queen.length;
+    for (let i = 0; i < len; i++) {
+      let cur = queen.shift();
+      cur.next = (i !== len - 1) ? queen[0] : null;
+      if (cur.left) queen.push(cur.left);
+      if (cur.right) queen.push(cur.right);
     }
-    mostLeft = mostLeft.left;
   }
   return root;
 };

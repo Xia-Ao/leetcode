@@ -19,35 +19,19 @@
  * @return {TreeNode}
  */
 var buildTree = function (inorder, postorder) {
+  if(inorder.length === 0) return null;
+  const rootVal = postorder[postorder.length - 1];
+  const root = new TreeNode(rootVal);
+  const rootIndex = inorder.indexOf(rootVal);
 
-  /**
-   * 递归思想
-   * 持续buildTree
-   */
+  const leftInorder = inorder.slice(0, rootIndex);
+  const rightInorder = inorder.slice(rootIndex + 1);
 
-  // 先通过后续找到root
-  if (!postorder.length) {
-    return null;
-  }
-  const root = new TreeNode(postorder[postorder.length - 1]);
+  const leftPostorder = postorder.slice(0, rootIndex);
+  const rightPostorder = postorder.slice(rootIndex, postorder.length - 1);
 
-  // 在中续结果中，找到root，并切割left right
-  if (!inorder.length) return root;
-  const inorderIndex = inorder.indexOf(root.val);
-
-  const left = inorder.slice(0, inorderIndex);
-  const right = inorder.slice(inorderIndex + 1);
-
-  // console.log(inorderIndex, left, right)
-
-  // 找到
-  const postorderLeft = postorder.slice(0, left.length);
-  const postorderRight = postorder.slice(left.length, postorder.length - 1);
-
-  // console.log(inorderIndex, left, right)
-
-  root.left = buildTree(left, postorderLeft);
-  root.right = buildTree(right, postorderRight);
+  root.left = buildTree(leftInorder, leftPostorder);
+  root.right = buildTree(rightInorder, rightPostorder);
   return root;
 };
 // @lc code=end

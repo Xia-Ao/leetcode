@@ -17,11 +17,11 @@
  * @param {TreeNode} root
  * @return {void} Do not return anything, modify root in-place instead.
  */
-var flatten = function(root) {
+var flatten = function (root) {
   if (!root) return;
   flatten(root.left);
   flatten(root.right);
-  let right = root.right;
+  const right = root.right;
   root.right = root.left;
   root.left = null;
   while (root.right) {
@@ -29,5 +29,6 @@ var flatten = function(root) {
   }
   root.right = right;
 };
+
 // @lc code=end
 

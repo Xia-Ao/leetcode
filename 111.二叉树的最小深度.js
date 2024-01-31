@@ -18,23 +18,19 @@
  * @return {number}
  */
 var minDepth = function (root) {
+  if (!root) return 0;
+  if (!root.left && !root.right) return 1;
 
-  if (!root) {
-    return 0;
-  }
-
-  if (!root.left && !root.right) {
-    return 1;
-  }
+  // 左右需要分开来看
   let min = Infinity;
   if (root.left) {
     min = Math.min(minDepth(root.left), min);
   }
   if (root.right) {
-    min = Math.min(minDepth(root.right), min)
+    min = Math.min(minDepth(root.right), min);
   }
-
   return min + 1;
+
 };
 // @lc code=end
 

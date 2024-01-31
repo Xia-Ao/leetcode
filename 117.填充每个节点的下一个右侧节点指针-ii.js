@@ -20,37 +20,22 @@
  * @return {Node}
  */
 var connect = function (root) {
-  // 类似 116， 不是完全二叉树，注意判断
-  if (root === null) {
-    return root;
-  }
+   // 层序遍历
+   if (!root) return root;
 
-  let mostLeft = root;
-  while (mostLeft.left !== null || mostLeft.right !== null) {
-    let head = mostLeft;
-    // 使用next的遍历
-    while (head !== null) {
-      // 第一种情况
-      if (head.left !== null) {
-        if (head.right !== null) {
-          head.left.next = head.right;
-          if (head.next !== null) {
-            head.right.next = head.next.left || head.next.right;
-          }
-        } else {
-          head.left.next = head.next.left || head.next.right;
-        }
-      } else if (head.right !== null) {
-        if (head.next !== null) {
-          head.right.next = head.next.left || head.next.right;
-        }
-      }
-      // 遍历next
-      head = head.next;
-    }
-    mostLeft = mostLeft.left;
-  }
-  return root;
+   const queen = [];
+   queen.push(root)
+ 
+   while (queen.length) {
+     let len = queen.length;
+     for (let i = 0; i < len; i++) {
+       let cur = queen.shift();
+       cur.next = (i !== len - 1) ? queen[0] : null;
+       if (cur.left) queen.push(cur.left);
+       if (cur.right) queen.push(cur.right);
+     }
+   }
+   return root;
 };
 // @lc code=end
 

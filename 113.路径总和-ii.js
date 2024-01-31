@@ -20,24 +20,22 @@
  * 堆栈思想
  */
 var pathSum = function (root, targetSum) {
-  const res = [];
-  const temp = [];
+  let res = [];
+  let temp = [];
 
   function helper(root, targetSum) {
-    if (!root) {
-      return;
-    }
+    if (!root) return;
     temp.push(root.val);
     if (!root.left && !root.right && root.val === targetSum) {
       res.push([...temp]);
-    };
+    }
 
-
+    console.log('temp', temp);
     helper(root.left, targetSum - root.val);
     helper(root.right, targetSum - root.val);
+    console.log('temp 准备pop', temp,);
     temp.pop();
   }
-
   helper(root, targetSum);
   return res;
 };
