@@ -27,6 +27,10 @@ var kthSmallest = function (root, k) {
     }
     dfs(root.left);
     res.push(root.val);
+    // 减少遍历次数
+    if(res.length ===k){
+      return
+    }
     dfs(root.right);
   }
   dfs(root);

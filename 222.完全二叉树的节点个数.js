@@ -27,8 +27,8 @@ var countNodes = function (root) {
     }
     sum++;
     // console.log('sum', sum,);
-    helper(root.left, sum);
-    helper(root.right, sum);
+    helper(root.left);
+    helper(root.right);
   }
 
   helper(root);
