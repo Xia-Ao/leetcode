@@ -20,27 +20,32 @@
  */
 var deleteNode = function (root, key) {
 
-  function find(root, key) {
-    if (!root) return
-    if (root.val === key) {
-      if(!root.left && root.right)
-      return root;
-    } else {
-      dfs(root.val < key ? root.right : root.left, key)
+  if (!root) return null;
+  if (root.val > key) {
+    root.left = deleteNode(root.left, key);
+    return root;
+  }
+  if (root.val < key) {
+    root.right = deleteNode(root.right, key);
+    return root;
+  }
+  if (root.val === key) {
+    // 叶子节点
+    if (!root.left && !root.right) return null
+    if (!root.left) return root.right;
+    if (!root.right) return root.left;
+    // 此时，左右都有，需要找到左节点的最右子节点，或者右节点的最左节点 删除
+    let acc = root.left;
+    while (acc.right) {
+      acc = acc.right
     }
+    root.left = deleteNode(root.left, acc.val);
+    acc.left = root.left;
+    acc.right = root.right;
+    return acc;
   }
-  const node = find(root, key);
-  if (!node) return root;
-  // 找到root.left 最右叶子节点
-  function helperLeft(root, parent) {
-    if (!root) return;
-    if (!root.right) return root.val;
-    return helper(root.right, root)
-  }
-
-  const t = helper(node.left, node);
-  node.val = t;
   return root;
+
 };
 // @lc code=end
 
