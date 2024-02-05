@@ -21,22 +21,23 @@ var findFrequentTreeSum = function (root) {
   const map = {};
 
   function dfs(root) {
-    if (!root) return null;
     let res
+    if (!root) return null;
     if (!root.left && !root.right) {
       res = root.val;
-      map[res] = map[res] === undefined ? 1 : map[res]++;
+      map[res] = map[res] === undefined ? 1 : map[res] + 1;
+      // console.log('res---', res, map)
       return res;
     };
     const left = dfs(root.left);
     const right = dfs(root.right);
     res = left + right + root.val;
-    // console.log('res', res, map, map[res] === undefined)
     map[res] = map[res] === undefined ? 1 : map[res] + 1;
+    // console.log('res', res, map)
     return res;
   }
   dfs(root);
-  console.log(map);
+  // console.log(map);
 
 
   let max = 0;
