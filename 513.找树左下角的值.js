@@ -19,10 +19,21 @@
  */
 var findBottomLeftValue = function (root) {
   let maxLeft;
+  let maxDepth = -1;
   function dfs(root, depth) {
     if (!root) return;
-
+    if (!root.left && !root.right && depth > maxDepth) {
+      maxDepth = depth;
+      maxLeft = root.val;
+      return;
+    }
+    dfs(root.left, depth + 1,)
+    dfs(root.right, depth + 1,)
   }
+
+  dfs(root, 0)
+  return maxLeft;
+
 };
 // @lc code=end
 
