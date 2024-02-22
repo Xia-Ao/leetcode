@@ -14,25 +14,24 @@
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
-    if(!s.length) return 0;
+var lengthOfLongestSubstring = function (s) {
+    if (!s) return 0;
 
-    let tempStr = '';   // 游标
-    let maxLength = 0;
-    let left = 0, right = 0; // 左游标位置
-    for (let i = 0; i < s.length; i++ ){
-        if (tempStr.indexOf(s[right]) > -1) {
-            // console.warn(i, tempStr, s[right])
-            // left的计算不能从s字符串开始计算，要通过原始值加上 tempStr只能够重复元素的下标
-            left += tempStr.indexOf(s[right]) + 1;
-            // console.log(left, right, s.substring(left, right+1));
+
+    let left = 0;
+    let right = 0;
+    let str = '';
+    let max = 0;
+    for (let i = right; i < s.length; i++) {
+        let index = str.indexOf(s[i]);
+        if (index > -1) {
+            left += index + 1;
         }
-        right += 1;
-        tempStr = s.substring(left, right);
-        maxLength = Math.max(maxLength, tempStr.length);
+        right++;
+        str = s.slice(left, right);
+        max = Math.max(max, str.length)
     }
-
-    return maxLength;
+    return max;
 
 };
 // test 

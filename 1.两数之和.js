@@ -32,13 +32,13 @@ var twoSum = function (nums, target) {
   // }
 
   // 如果将map换为一个数组 内存占用会少很多
-  let map = [];
-  for (let i = 0; i < nums.length; i++) {
-    let diff = target - nums[i];
-    if (map[diff] !== undefined) {
-      return [map[diff], i]
+  let temp = [];
+  for (let i = 0; i <= nums.length; i++) {
+    if (temp[target - nums[i]] !== undefined) {
+      return [temp[target - nums[i]], i]
+    } else {
+      temp[nums[i]] = i;
     }
-    map[nums[i]] = i;
   }
 };
 // @lc code=end
