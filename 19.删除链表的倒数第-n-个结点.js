@@ -20,33 +20,29 @@
 var removeNthFromEnd = function (head, n) {
   let cur = head;
 
-  // 遍历获取链表长度
+  // 获取链表长度
   let len = 0;
   while (cur) {
+    cur = cur.next;
     len++;
-    cur = cur.next;
   }
 
-  // 回到head 重头再来
+  // 
   cur = head;
-  if (n === len) {
-    return cur.next;
-  }
+  if (n === len) return head.next;
+  // 遍历到n
   let i = 0;
-  while (i < len - n - 1 && cur) {
-    i++;
+  while (i < n && cur) {
     cur = cur.next;
+    i++;
   }
 
-  let delNode = cur.next;
-
-  // 如果nextHead后面还有值的话，暂存起来
-  if (delNode && delNode.next) {
-    cur.next = delNode.next;
+  const deleteList = cur.next;
+  if(deleteList && deleteList.next){
+    cur.next = deleteList.next;
   } else {
-    cur.next = null;
+    
   }
-  return head;
 
   // 双指针， 指针位置相差n
 
