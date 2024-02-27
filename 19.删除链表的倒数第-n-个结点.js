@@ -26,25 +26,25 @@ var removeNthFromEnd = function (head, n) {
     cur = cur.next;
     len++;
   }
+  console.log('len', len);
 
   // 
   cur = head;
   if (n === len) return head.next;
   // 遍历到n
   let i = 0;
-  while (i < n && cur) {
+  while (i < len - n - 1 && cur) {
     cur = cur.next;
     i++;
   }
-
+  // console.log('cur', cur);
   const deleteList = cur.next;
-  if(deleteList && deleteList.next){
+  if (deleteList && deleteList.next) {
     cur.next = deleteList.next;
   } else {
-    
+    cur.next = null;
   }
-
-  // 双指针， 指针位置相差n
+  return head;
 
 };
 // @lc code=end
