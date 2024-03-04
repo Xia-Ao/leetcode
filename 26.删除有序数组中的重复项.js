@@ -14,18 +14,18 @@ var removeDuplicates = function (nums) {
   // 不要使用数组的splice操作
   // 双指针
 
-  let len = nums.length;
+  const len = nums.length;
   let slow = 1;
   let fast = 1;
 
   while (fast < len) {
     if (nums[fast] !== nums[fast - 1]) {
       nums[slow] = nums[fast];
-      slow++
+      slow++;
     }
-    ++fast;
+    fast++;
   }
-  return slow;
+  return slow ;
 };
 // @lc code=end
 
