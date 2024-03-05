@@ -32,17 +32,12 @@ var swapPairs = function (head) {
   // }
   // return newHead.next;
 
+  if (!head || !head.next) return head;
 
-  if(!head || !head.next) {
-    return head;
-  }
-
-  let b = head.next;
-  head.next = swapPairs(b.next);
-  b.next = head;
-
-  return b;
-
+  const temp = head.next;
+  head.next = swapPairs(temp.next);
+  temp.next = head;
+  return temp;
 };
 // @lc code=end
 

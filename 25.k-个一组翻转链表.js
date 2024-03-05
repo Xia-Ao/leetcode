@@ -18,41 +18,41 @@
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-  if (!head || !head.next) return head;
-  // 判断head是否长度是够k，不够的话直接return 同时找到k段链表的最后一个
+
+  if (!head || !head.next || k <= 1) { return head }
+
   let len = 1;
   let cur = head;
   while (cur && cur.next && len < k) {
     cur = cur.next;
     len++;
   }
-  if (len < k) return head;
-
-  let temp = cur.next; // 之后的暂存
-  cur.next = null; // 切断链表
-  // 反转 生成新的链表
-  let newHead = reverse(head);
-  // 走到新链表的最后一个，然后拼接后面 反转的链表
-  cur = newHead;
-  while (cur && cur.next) {
-    cur = cur.next;
+  if (len < k) {
+    return head;
   }
-  cur.next = reverseKGroup(temp, k);
-  return newHead;
+  let reset = cur.next;
+  cur.next = null;
+
+  const newLink = reverse(head)
+  let newCur = newLink;
+  // 遍历到最后一个
+  while (newCur && newCur.next) {
+    newCur = newCur.next;
+  }
+  newCur.next = reverseKGroup(reset, k);
+  return newLink;
 };
 
-// 反转链表
 function reverse(head) {
-  if (!head) return head;
-
   let cur = head;
-  let pre = null; // 定义一个pre存已经反转过的
+  let pre = null;
 
   while (cur) {
-    const temp = cur.next;
-    cur.next = pre; // 将pre拼接到cur后面
-    pre = cur; //  cur 此时就是反转后的，所以赋给pre
-    cur = temp; // cur 改为未处理的，现在开始
+    let temp = cur.next;
+    cur.next = pre;
+    pre = cur;
+
+    cur = temp;
   }
   return pre;
 }

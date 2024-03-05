@@ -17,8 +17,8 @@
  * @return {ListNode}
  */
 var mergeKLists = function (lists) {
-  function mergeTwoLists(l1, l2) {
 
+  function mergeTwoLists(l1, l2) {
     const head = new ListNode(-1);
     let cur = head;
 
@@ -34,8 +34,20 @@ var mergeKLists = function (lists) {
     }
     cur.next = l1 ? l1 : l2;
     return head.next;
-
   };
+
+  if (lists.length === 0) return null;
+  if (lists.length === 1) return lists[0];
+  while (lists.length > 1) {
+    const newList = [];
+    for (let i = 0; i < lists.length; i += 2) {
+      const l1 = lists[i];
+      const l2 = i + 1 < lists.length ? lists[i + 1] : null;
+      newList.push(mergeTwoLists(l1, l2))
+    }
+    lists = newList;
+  }
+  return lists[0]
 };
 
 

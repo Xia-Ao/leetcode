@@ -18,16 +18,17 @@
  */
 var reverseList = function (head) {
 
-  let currentNode = head; // 1
-  let preNode = null; // 
+  let cur = head;
+  let pre = null;
+  while (cur) {
+    let temp = cur.next;
+    cur.next = pre;
+    pre = cur; 
 
-  while (currentNode) {
-    let temp = currentNode.next; // 2345 暂存起来
-    currentNode.next = preNode // 使用前一个值替换 
-    preNode = currentNode; // 前一个值等于当前替换后的链表
-    currentNode = temp; // 当前链表替换为暂存起来的值
-  };
-  return preNode;
+    // 更新cur
+    cur = temp;
+  }
+  return pre;
 };
 
 
