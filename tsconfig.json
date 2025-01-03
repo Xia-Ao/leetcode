@@ -6,13 +6,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "outDir": "./",
+    "rootDir": "./"
   },
-  "include": [
-    "./globals.d.ts",
-    "./*.ts"
-  ],
+  "include": ["globals.d.ts","./*.ts"],
   "exclude": [
     "node_modules",
     "dist"
