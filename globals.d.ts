@@ -1,5 +1,3 @@
-export {};
-
 declare global {
   class TreeNode {
     val: number;
@@ -8,3 +6,5 @@ declare global {
     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null);
   }
 }
+
+export {};
